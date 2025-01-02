@@ -35,3 +35,5 @@ Name should be kept alphabetically sorted and added in the following form::
 
 List of copyright holders
 -------------------------
+
+- Jimmy Thrasibule <dev@jimmy.lt>
