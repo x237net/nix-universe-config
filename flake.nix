@@ -24,7 +24,29 @@
     inputs = {
         # Nixpkgs, the Nix packages collection.
         nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+
+        # Snowfall, opinionated Nix flake structure.
+        snowfall-lib.url = "github:snowfallorg/lib";
+        snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    outputs = inputs: {}
+    outputs = inputs:
+    let
+        lib = inputs.snowfall-lib.mkLib {
+            inherit inputs;
+
+            src = ./.;
+
+            snowfall = {
+                namespace = "universe";
+
+                meta = {
+                    title = "universe/config";
+                    name = "universe-config";
+                    license = "MIT";
+                };
+            };
+        };
+    in
+        lib.mkFlake {};
 }
