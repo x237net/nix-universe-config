@@ -19,34 +19,37 @@
 # *universe/config*. If not, see <http://opensource.org/licenses/MIT>.
 #
 {
-    description = "universe/config, configure the universe.";
+  description = "universe/config, configure the universe.";
 
-    inputs = {
-        # Nixpkgs, the Nix packages collection.
-        nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+  inputs = {
+    # Nixpkgs, the Nix packages collection.
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
-        # Snowfall, opinionated Nix flake structure.
-        snowfall-lib.url = "github:snowfallorg/lib";
-        snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # Snowfall, opinionated Nix flake structure.
+    snowfall-lib.url = "github:snowfallorg/lib";
+    snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
+  };
 
-    outputs = inputs:
-    let
-        lib = inputs.snowfall-lib.mkLib {
-            inherit inputs;
+  outputs = inputs: let
+    lib = inputs.snowfall-lib.mkLib {
+      inherit inputs;
 
-            src = ./.;
+      src = ./.;
 
-            snowfall = {
-                namespace = "universe";
+      snowfall = {
+        namespace = "universe";
 
-                meta = {
-                    title = "universe/config";
-                    name = "universe-config";
-                    license = "MIT";
-                };
-            };
+        meta = {
+          title = "universe/config";
+          name = "universe-config";
+          license = "MIT";
         };
-    in
-        lib.mkFlake {};
+      };
+    };
+  in
+    lib.mkFlake {
+      outputs-builder = channels: {
+        formatter = channels.nixpkgs.alejandra;
+      };
+    };
 }
