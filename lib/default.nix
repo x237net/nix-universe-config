@@ -18,3 +18,13 @@
 # You should have received a copy of the MIT License along with
 # *universe/config*. If not, see <http://opensource.org/licenses/MIT>.
 #
+{
+  # Flake's library as well as the libraries available from the flake's
+  # inputs.
+  lib,
+  # Flake's inputs.
+  inputs,
+  # The namespace of the flake. See `snowfall.namespace`.
+  namespace,
+  ...
+}: {}
