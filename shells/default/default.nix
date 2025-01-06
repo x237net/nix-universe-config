@@ -1,5 +1,5 @@
-# lib/default.nix
-# ===============
+# shells/default/default.nix
+# ==========================
 #
 # Copying
 # -------
@@ -26,5 +26,12 @@
   inputs,
   # The namespace of the flake. See `snowfall.namespace`.
   namespace,
+  # An instance of `pkgs` with the overlays and other packages.
+  pkgs,
+  mkShell,
   ...
-}: {}
+}:
+mkShell {
+  inherit (lib.universe.dev.git-hooks.${pkgs.stdenv.hostPlatform.system}) shellHook;
+  buildInputs = lib.universe.dev.git-hooks.${pkgs.stdenv.hostPlatform.system}.enabledPackages;
+}

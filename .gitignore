@@ -19,6 +19,12 @@
 # *universe/config*. If not, see <http://opensource.org/licenses/MIT>.
 #
 
+# Git
+# ---
+
+.pre-commit-config.yaml
+
+
 # Editors
 # -------
 

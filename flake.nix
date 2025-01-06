@@ -28,6 +28,13 @@
     # Snowfall, opinionated Nix flake structure.
     snowfall-lib.url = "github:snowfallorg/lib";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
+
+    # flake-utils, utilities for working with Nix flakes.
+    flake-utils.url = "github:numtide/flake-utils";
+
+    # git-hooks.nix, seamless integration of git hooks with Nix.
+    pre-commit-hooks.url = "github:cachix/git-hooks.nix";
+    pre-commit-hooks.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs: let
@@ -48,6 +55,7 @@
     };
   in
     lib.mkFlake {
+      supportedSystems = ["aarch64-darwin" "x86_64-linux"];
       outputs-builder = channels: {
         formatter = channels.nixpkgs.alejandra;
       };
