@@ -22,19 +22,31 @@
   description = "universe/config, configure the universe.";
 
   inputs = {
+    # flake-compat, compatibility layer for stable Nix.
+    flake-compat = {
+      url = "github:edolstra/flake-compat";
+      flake = false;
+    };
+
     # Nixpkgs, the Nix packages collection.
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     # Snowfall, opinionated Nix flake structure.
-    snowfall-lib.url = "github:snowfallorg/lib";
-    snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
+    snowfall-lib = {
+      url = "github:snowfallorg/lib";
+      inputs.flake-compat.follows = "flake-compat";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # flake-utils, utilities for working with Nix flakes.
     flake-utils.url = "github:numtide/flake-utils";
 
     # git-hooks.nix, seamless integration of git hooks with Nix.
-    pre-commit-hooks.url = "github:cachix/git-hooks.nix";
-    pre-commit-hooks.inputs.nixpkgs.follows = "nixpkgs";
+    pre-commit-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.flake-compat.follows = "flake-compat";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs: let
