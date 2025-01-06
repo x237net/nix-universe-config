@@ -30,7 +30,50 @@
 }: {
   dev = {
     git-hooks = let
-      hooks = {};
+      hooks = {
+        # https://github.com/pre-commit/pre-commit-hooks
+        check-added-large-files.enable = true;
+        check-builtin-literals.enable = true;
+        check-case-conflicts.enable = true;
+        check-docstring-first.enable = true;
+        check-executables-have-shebangs.enable = true;
+        check-json.enable = true;
+        check-merge-conflicts.enable = true;
+        check-python.enable = true;
+        check-shebang-scripts-are-executable.enable = true;
+        check-symlinks.enable = true;
+        check-toml.enable = true;
+        check-yaml.enable = true;
+        detect-aws-credentials.enable = true;
+        detect-private-keys.enable = true;
+        end-of-file-fixer.enable = true;
+        fix-byte-order-marker.enable = true;
+        fix-encoding-pragma.enable = true;
+        fix-encoding-pragma.args = ["--remove"];
+        mixed-line-endings.enable = true;
+        mixed-line-endings.args = ["--fix=lf"];
+        no-commit-to-branch.enable = true;
+        pretty-format-json.enable = true;
+        python-debug-statements.enable = true;
+        trim-trailing-whitespace.enable = true;
+        # https://github.com/kamadorueda/alejandra
+        alejandra.enable = true;
+        # https://github.com/psf/black
+        black.enable = true;
+        # https://github.com/PyCQA/isort
+        isort.enable = true;
+        isort.args = ["--profile" "black"];
+        # https://github.com/astral-sh/ruff-pre-commit
+        ruff.enable = true;
+        # https://github.com/koalaman/shellcheck
+        shellcheck.enable = true;
+        # https://github.com/mvdan/sh
+        shfmt.enable = true;
+        # https://github.com/oppiliappan/statix
+        statix.enable = true;
+        # https://github.com/adrienverge/yamllint
+        yamllint.enable = true;
+      };
     in
       lib.flake-utils.eachDefaultSystemPassThrough (system: {
         ${system} = inputs.pre-commit-hooks.lib.${system}.run {
