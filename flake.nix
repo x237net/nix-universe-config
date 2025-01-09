@@ -34,6 +34,12 @@
     # flake-utils, utilities for working with Nix flakes.
     flake-utils.url = "github:numtide/flake-utils";
 
+    # home-manager, managing a user environment using Nix.
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # git-hooks.nix, seamless integration of git hooks with Nix.
     pre-commit-hooks = {
       url = "github:cachix/git-hooks.nix";
