@@ -22,28 +22,40 @@
   description = "universe/config, configure the universe.";
 
   inputs = {
+    # Nixpkgs, the Nix packages collection.
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+
     # flake-compat, compatibility layer for stable Nix.
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
     };
 
-    # Nixpkgs, the Nix packages collection.
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    # flake-utils, utilities for working with Nix flakes.
+    flake-utils.url = "github:numtide/flake-utils";
 
-    # Snowfall, opinionated Nix flake structure.
-    snowfall-lib = {
-      url = "github:snowfallorg/lib";
-      inputs.flake-compat.follows = "flake-compat";
+    # home-manager, managing a user environment using Nix.
+    home-manager = {
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # flake-utils, utilities for working with Nix flakes.
-    flake-utils.url = "github:numtide/flake-utils";
+    # nix-darwin, declarative system approach to macOS.
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # git-hooks.nix, seamless integration of git hooks with Nix.
     pre-commit-hooks = {
       url = "github:cachix/git-hooks.nix";
+      inputs.flake-compat.follows = "flake-compat";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Snowfall, opinionated Nix flake structure.
+    snowfall-lib = {
+      url = "github:snowfallorg/lib";
       inputs.flake-compat.follows = "flake-compat";
       inputs.nixpkgs.follows = "nixpkgs";
     };
