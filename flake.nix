@@ -40,6 +40,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # nix-darwin, declarative system approach to macOS.
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # git-hooks.nix, seamless integration of git hooks with Nix.
     pre-commit-hooks = {
       url = "github:cachix/git-hooks.nix";
