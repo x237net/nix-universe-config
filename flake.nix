@@ -25,6 +25,12 @@
     # Nixpkgs, the Nix packages collection.
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
+    # nix-darwin, declarative system approach to macOS.
+    darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # flake-compat, compatibility layer for stable Nix.
     flake-compat = {
       url = "github:edolstra/flake-compat";
@@ -37,12 +43,6 @@
     # home-manager, managing a user environment using Nix.
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # nix-darwin, declarative system approach to macOS.
-    nix-darwin = {
-      url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
