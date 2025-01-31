@@ -44,12 +44,12 @@
   ...
 }:
 with lib; let
-  cfg = config.${namespace}.home.git;
+  cfg = config.universe.home.git;
 in {
   imports = lib.snowfall.fs.get-non-default-nix-files ./.;
 
-  options.${namespace}.home.git = with types; {
-    enable = mkEnableOption "${namespace}.home.git";
+  options.universe.home.git = with types; {
+    enable = mkEnableOption "universe.home.git";
 
     userEmail = mkOption {
       description = "Email address of the Git user.";
