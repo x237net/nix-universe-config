@@ -44,7 +44,7 @@
   ...
 }:
 with lib; let
-  cfg = config.${namespace}.home.git.aliases;
+  cfg = config.universe.home.git.aliases;
 
   defaultAliases = {
     alias = "config --get-regexp '^alias\.'";
@@ -85,9 +85,9 @@ with lib; let
     };
   };
 in {
-  options.${namespace}.home.git.aliases = {
+  options.universe.home.git.aliases = {
     enable = mkOption {
-      description = "Whether to enable ${namespace}.home.git.aliases";
+      description = "Whether to enable.universe.home.git.aliases";
       default = true;
       type = types.bool;
     };

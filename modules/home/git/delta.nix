@@ -44,7 +44,7 @@
   ...
 }:
 with lib; let
-  cfg = config.${namespace}.home.git.delta;
+  cfg = config.universe.home.git.delta;
 
   deltaOptions = {
     inherit (cfg) hyperlinks navigate;
@@ -64,9 +64,9 @@ with lib; let
     merge.conflictStyle = "zdiff3";
   };
 in {
-  options.${namespace}.home.git.delta = with types; {
+  options.universe.home.git.delta = with types; {
     enable = mkOption {
-      description = "Whether to enable ${namespace}.home.git.delta";
+      description = "Whether to enable.universe.home.git.delta";
       default = true;
       type = bool;
     };

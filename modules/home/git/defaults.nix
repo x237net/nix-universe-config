@@ -44,7 +44,7 @@
   ...
 }:
 with lib; let
-  cfg = config.${namespace}.home.git.defaults;
+  cfg = config.universe.home.git.defaults;
 
   gitOptions = {
     commit.verbose = true;
@@ -60,9 +60,9 @@ with lib; let
     status.submoduleSummary = true;
   };
 in {
-  options.${namespace}.home.git.defaults = with types; {
+  options.universe.home.git.defaults = with types; {
     enable = mkOption {
-      description = "Whether to enable ${namespace}.home.git.defaults";
+      description = "Whether to enable.universe.home.git.defaults";
       default = true;
       type = bool;
     };
