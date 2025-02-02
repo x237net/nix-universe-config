@@ -49,6 +49,20 @@ with lib; let
   brewsDefault = [
     "mas"
   ];
+
+  registry = {
+    universe = {
+      from = {
+        type = "indirect";
+        id = "universe";
+      };
+      to = {
+        type = "github";
+        owner = "x237net";
+        repo = "nix-universe-config";
+      };
+    };
+  };
 in {
   options.universe.darwin.nix = with types; {
     enable = mkEnableOption "Enable the default Nix configuration for macOS.";
@@ -102,6 +116,8 @@ in {
 
   config = mkIf cfg.enable {
     nix = {
+      inherit registry;
+
       gc.automatic = cfg.store.optimise;
       optimise.automatic = cfg.store.optimise;
 
