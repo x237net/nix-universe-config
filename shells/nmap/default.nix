@@ -1,4 +1,4 @@
-# shells/http/default.nix
+# shells/nmap/default.nix
 # =======================
 #
 # Copying
@@ -35,24 +35,24 @@
 in
   mkShell {
     packages = with pkgs; [
-      bruno
-      bruno-cli
+      cdncheck
       curl
+      cvemap
       dnsutils
+      dnsx
       httpx
-      katana
+      ipcalc
+      masscan
+      naabu
+      nmap
+      nuclei
+      nuclei-templates
       openssl
-      playwright-driver
       subfinder
-
-      (python3.withPackages (
-        pypkgs:
-          with pypkgs; [
-            httpx
-            playwright
-            requests
-          ]
-      ))
+      tcpdump
+      termshark
+      tshark
+      wireshark
 
       "${shell}"
     ];
