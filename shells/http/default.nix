@@ -43,6 +43,7 @@ in
       katana
       openssl
       playwright-driver
+      subfinder
 
       (python3.withPackages (
         pypkgs:
