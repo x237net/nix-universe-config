@@ -26,6 +26,10 @@
     with lib.types; {
       enable = mkEnableOption "Whether to enable management of Firefox.";
 
+      enhancedPrivacy = mkEnableOption ''
+        Enable enhanced privacy settings in Firefox.
+      '';
+
       package = mkOption {
         description = "The Firefox package to install.";
         default = pkgs.firefox;
@@ -37,6 +41,15 @@
           Whether to install the Firefox package as part of the user profile.
         '';
         default = !isDarwin;
+        type = bool;
+      };
+
+      zenMode = mkOption {
+        description = ''
+          Enable Zen mode in Firefox. Zen mode is a minimalistic mode that
+          removes all UI elements except the content area.
+        '';
+        default = false;
         type = bool;
       };
     };
