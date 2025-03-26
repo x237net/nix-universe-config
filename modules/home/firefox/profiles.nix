@@ -1,5 +1,5 @@
-# modules/home/firefox/default.nix
-# ================================
+# modules/home/firefox/profiles.nix
+# =================================
 #
 # Copying
 # -------
@@ -42,23 +42,51 @@
   # Options coming from user of the module.
   config,
   ...
-}:
-with lib; let
-  cfg = config.universe.home.firefox;
+}: with lib; let
+  cfg = config.universe.home.firefox.profiles;
 
-  package =
-    if cfg.packageInstall
-    then cfg.package
-    else null;
+  profiles = universe.apps.firefox.profiles.toList cfg
+    |> imap0 (
+      id: p: {
+        ${p.name} = {
+          inherit id;
+          inherit (p.value) isDefault name;
+        };
+      }
+    )
+    |> mergeAttrsList;
 in {
-  imports = universe.fs.import-directory ./.;
+  options.universe.home.firefox.profiles = with types; mkOption {
+    type = attrsOf (submodule {
+      options = {
+        isDefault = mkOption {
+          type = bool;
+          default = false;
+          description = ''
+            Whether this profile is the default one. This should be set to
+            `true` for only one profile.
+          '';
+        };
 
-  options.universe.home.firefox = universe.apps.firefox.mkOptions;
+        name = mkOption {
+          type = str;
+          default = "Profile";
+          description = "The profile name.";
+        };
+      };
+    });
 
-  config = mkIf cfg.enable {
+    default = {
+      default = {
+        isDefault = true;
+        name = "Default";
+      };
+    };
+  };
+
+  config = {
     programs.firefox = {
-      inherit (cfg) enable;
-      inherit package;
+      inherit profiles;
     };
   };
 }
