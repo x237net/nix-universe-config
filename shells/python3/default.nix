@@ -32,6 +32,56 @@
   ...
 }: let
   shell = builtins.baseNameOf (builtins.getEnv "SHELL");
+  fastfetch_cfg = pkgs.writeText "fastfetch.jsonc" (
+    lib.universe.shells.mkFastFetchConfig
+    "A Python 3 development environment."
+    [
+      {
+        name = "Python 3";
+        description = "An interpreted, interactive, object-oriented programming language.";
+      }
+      {
+        name = "Black";
+        description = "A PEP 8 compliant uncompromising Python code formatter.";
+      }
+      {
+        name = "Cookiecutter";
+        description = "A cross-platform command-line utility that creates projects from templates.";
+      }
+      {
+        name = "Git";
+        description = "A distributed version control system that tracks versions of files.";
+      }
+      {
+        name = "isort";
+        description = "A Python utility to sort imports.";
+      }
+      {
+        name = "Mypy";
+        description = "A static type checker for Python.";
+      }
+      {
+        name = "Poetry";
+        description = "A tool for dependency management and packaging in Python.";
+      }
+      {
+        name = "pyenv";
+        description = "Lets you easily switch between multiple versions of Python.";
+      }
+      {
+        name = "Ruff";
+        description = "An extremely fast Python linter and code formatter.";
+      }
+      {
+        name = "Sphinx";
+        description = "A documentation generator.";
+      }
+      {
+        name = "uv";
+        description = "An extremely fast Python package and project manager.";
+      }
+    ]
+  );
 in
   mkShell {
     packages = with pkgs;
@@ -48,6 +98,7 @@ in
         sphinx
         uv
 
+        fastfetch
         "${shell}"
       ]
       ++ pkgs.python3.buildInputs
@@ -59,7 +110,12 @@ in
       ];
 
     PYTHON_CONFIGURE_OPTS = builtins.concatStringsSep " " pkgs.python3.configureFlags;
+
+    name = "python3";
     shellHook = ''
+      PS1="[''${name}] ''${PS1-}"
+
       exec ${shell}
+      fastfetch --config "${fastfetch_cfg}"
     '';
   }

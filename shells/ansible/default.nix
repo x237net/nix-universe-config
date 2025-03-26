@@ -32,6 +32,28 @@
   ...
 }: let
   shell = builtins.baseNameOf (builtins.getEnv "SHELL");
+  fastfetch_cfg = pkgs.writeText "fastfetch.jsonc" (
+    lib.universe.shells.mkFastFetchConfig
+    "IT automation using Ansible."
+    [
+      {
+        name = "Ansible";
+        description = "An automation engine that automates many IT processes.";
+      }
+      {
+        name = "ansible-lint";
+        description = "A command-line tool for linting Ansible playbooks.";
+      }
+      {
+        name = "Git";
+        description = "A distributed version control system that tracks versions of files.";
+      }
+      {
+        name = "Molecule";
+        description = "A tool designed to aid in developing and testing Ansible playbooks.";
+      }
+    ]
+  );
 in
   mkShell {
     packages = with pkgs; [
@@ -40,10 +62,15 @@ in
       git
       molecule
 
+      fastfetch
       "${shell}"
     ];
 
+    name = "ansible";
     shellHook = ''
+      PS1="[''${name}] ''${PS1-}"
+
       exec ${shell}
+      fastfetch --config "${fastfetch_cfg}"
     '';
   }
