@@ -132,7 +132,10 @@ in
       "${shell}"
     ];
 
+    name = "nmap";
     shellHook = ''
+      PS1="[''${name}] ''${PS1-}"
+
       exec ${shell}
       fastfetch --config "${fastfetch_cfg}"
     '';

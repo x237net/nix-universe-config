@@ -110,7 +110,11 @@ in
       ];
 
     PYTHON_CONFIGURE_OPTS = builtins.concatStringsSep " " pkgs.python3.configureFlags;
+
+    name = "python3";
     shellHook = ''
+      PS1="[''${name}] ''${PS1-}"
+
       exec ${shell}
       fastfetch --config "${fastfetch_cfg}"
     '';
