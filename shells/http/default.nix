@@ -32,6 +32,44 @@
   ...
 }: let
   shell = builtins.baseNameOf (builtins.getEnv "SHELL");
+  fastfetch_cfg = pkgs.writeText "fastfetch.jsonc" (
+    lib.universe.shells.mkFastFetchConfig
+    "A shell environment to query HTTP resources."
+    [
+      {
+        name = "Bruno";
+        description = "A Git-friendly and offline-first open-source API client.";
+      }
+      {
+        name = "curl";
+        description = "A tool for transferring data from or to a server using URLs.";
+      }
+      {
+        name = "dnsutils";
+        description = "Various client programs related to DNS that are derived from the BIND source tree.";
+      }
+      {
+        name = "httpx";
+        description = "A fully featured HTTP client.";
+      }
+      {
+        name = "Katana";
+        description = "A fast crawler focused on execution in automation pipelines.";
+      }
+      {
+        name = "OpenSSL";
+        description = "A full-featured open-source Toolkit for the TLS (formerly SSL), DTLS and QUIC protocols.";
+      }
+      {
+        name = "Playwright";
+        description = "A fast and reliable end-to-end testing for modern Web apps.";
+      }
+      {
+        name = "subfinder";
+        description = "A subdomain discovery tool that returns valid subdomains for websites, using passive online sources.";
+      }
+    ]
+  );
 in
   mkShell {
     packages = with pkgs; [
@@ -54,10 +92,12 @@ in
           ]
       ))
 
+      fastfetch
       "${shell}"
     ];
 
     shellHook = ''
       exec ${shell}
+      fastfetch --config "${fastfetch_cfg}"
     '';
   }
