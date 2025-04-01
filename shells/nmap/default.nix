@@ -108,35 +108,40 @@
   );
 in
   mkShell {
-    packages = with pkgs; [
-      cdncheck
-      curl
-      cvemap
-      dnsutils
-      dnsx
-      httpx
-      ipcalc
-      masscan
-      naabu
-      nmap
-      nuclei
-      nuclei-templates
-      openssl
-      subfinder
-      tcpdump
-      termshark
-      tshark
-      wireshark
+    packages = with pkgs;
+      [
+        cdncheck
+        curl
+        cvemap
+        dnsutils
+        dnsx
+        httpx
+        ipcalc
+        masscan
+        naabu
+        nmap
+        nuclei
+        nuclei-templates
+        openssl
+        subfinder
+        tcpdump
+        termshark
+        tshark
+        wireshark
 
-      fastfetch
-      "${shell}"
-    ];
+        fastfetch
+      ]
+      ++ (lib.optional (shell != "") pkgs.${shell});
 
     name = "nmap";
     shellHook = ''
-      PS1="[''${name}] ''${PS1-}"
-
-      exec ${shell}
       fastfetch --config "${fastfetch_cfg}"
+
+      export PS1="[''${name}]$ "
+      if [ "${shell}" ]
+      then
+        export SHELL="$(which ${shell})"
+        exec ''${SHELL}
+      fi
     '';
   }
