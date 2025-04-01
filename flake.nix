@@ -83,5 +83,9 @@
       outputs-builder = channels: {
         formatter = channels.nixpkgs.alejandra;
       };
+
+      alias = {
+        shells.python = "python3";
+      };
     };
 }
