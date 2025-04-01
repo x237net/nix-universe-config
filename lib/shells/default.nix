@@ -43,7 +43,6 @@ with lib; {
 
     mkFastFetchSystemModules = [
       "os"
-      "shell"
       {
         type = "title";
         key = "User";

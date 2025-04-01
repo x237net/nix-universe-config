@@ -99,7 +99,6 @@ in
         uv
 
         fastfetch
-        "${shell}"
       ]
       ++ pkgs.python3.buildInputs
       ++ [
@@ -107,15 +106,20 @@ in
         libuuid
         tcl
         tk
-      ];
+      ]
+      ++ (lib.optional (shell != "") pkgs.${shell});
 
     PYTHON_CONFIGURE_OPTS = builtins.concatStringsSep " " pkgs.python3.configureFlags;
 
     name = "python3";
     shellHook = ''
-      PS1="[''${name}] ''${PS1-}"
-
-      exec ${shell}
       fastfetch --config "${fastfetch_cfg}"
+
+      export PS1="[''${name}]$ "
+      if [ "${shell}" ]
+      then
+        export SHELL="$(which ${shell})"
+        exec ''${SHELL}
+      fi
     '';
   }
