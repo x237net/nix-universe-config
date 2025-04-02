@@ -63,5 +63,16 @@
         type = bool;
       };
     };
+
+    path = {
+      home = {
+        aarch64-darwin.managedStorage = "Library/Application Support/Mozilla/ManagedStorage";
+        x86_64-linux.managedStorage = ".mozilla/managed-storage";
+      };
+      system = {
+        aarch64-darwin.managedStorage = "/Library/Application Support/Mozilla/ManagedStorage";
+        x86_64-linux.managedStorage = "/usr/lib64/mozilla/managed-storage";
+      };
+    };
   };
 }
