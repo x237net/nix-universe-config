@@ -56,6 +56,10 @@ in {
   options.universe.home.firefox = universe.apps.firefox.mkOptions;
 
   config = mkIf cfg.enable {
+    _module.args = {
+      inherit format inputs namespace system systems target virtual;
+    };
+
     programs.firefox = {
       inherit (cfg) enable;
       inherit package;
