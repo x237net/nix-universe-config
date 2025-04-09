@@ -135,6 +135,7 @@ in {
 
   config = mkIf cfg.enable {
     home.shell.enableZshIntegration = cfg.enable;
+    programs.starship.enableZshIntegration = config.universe.home.shell.starship.enable;
 
     programs.zsh = {
       inherit (cfg) enable;
