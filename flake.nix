@@ -25,6 +25,12 @@
     # Nixpkgs, the Nix packages collection.
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
+    # Nix User Repository (NUR), a community-driven repository for Nix packages.
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # nix-darwin, declarative system approach to macOS.
     darwin = {
       url = "github:LnL7/nix-darwin";
@@ -87,5 +93,9 @@
       alias = {
         shells.python = "python3";
       };
+
+      overlays = with inputs; [
+        nur.overlays.default
+      ];
     };
 }
