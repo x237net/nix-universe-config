@@ -98,17 +98,6 @@ in {
       autoUninstall = mkEnableOption "Automatically uninstall Homebrew packages.";
     };
 
-    service = {
-      enable = mkOption {
-        description = ''
-          Enable the Nix daemon to perform store operations on behalf of
-          non-root clients.
-        '';
-        default = true;
-        type = bool;
-      };
-    };
-
     store = {
       optimise = mkEnableOption "Automatically clean and optimise the Nix store.";
     };
@@ -126,7 +115,6 @@ in {
         trusted-users = cfg.trustedUsers;
       };
     };
-    services.nix-daemon.enable = cfg.service.enable;
 
     homebrew = mkIf cfg.homebrew.enable {
       inherit (cfg.homebrew) enable;
