@@ -45,15 +45,16 @@
 }:
 with lib; let
   cfg = config.universe.darwin.firefox;
-
-  package = if cfg.packageInstall then cfg.package else null;
 in {
   imports = universe.fs.import-directory ./.;
 
   options.universe.darwin.firefox = universe.apps.firefox.mkOptions;
 
   config = mkIf cfg.enable {
-    inherit (cfg) enable;
-    inherit package;
+    environment = {
+      systemPackages = mkIf cfg.packageInstall [
+        cfg.package
+      ];
+    };
   };
 }
