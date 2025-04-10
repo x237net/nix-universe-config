@@ -44,7 +44,7 @@
         description = ''
           Whether to install the Firefox package as part of the user profile.
         '';
-        default = !isDarwin;
+        default = true;
         type = bool;
       };
 
