@@ -40,17 +40,11 @@
         Enable enhanced privacy settings in Firefox.
       '';
 
-      package = mkOption {
-        description = "The Firefox package to install.";
-        default = pkgs.firefox;
-        type = nullOr package;
-      };
-
       packageInstall = mkOption {
         description = ''
           Whether to install the Firefox package as part of the user profile.
         '';
-        default = !isDarwin;
+        default = true;
         type = bool;
       };
 

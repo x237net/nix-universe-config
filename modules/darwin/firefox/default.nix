@@ -48,7 +48,15 @@ with lib; let
 in {
   imports = universe.fs.import-directory ./.;
 
-  options.universe.darwin.firefox = universe.apps.firefox.mkOptions;
+  options.universe.darwin.firefox =
+    universe.apps.firefox.mkOptions
+    // {
+      package = mkOption {
+        description = "The Firefox package to install.";
+        default = pkgs.firefox;
+        type = types.nullOr types.package;
+      };
+    };
 
   config = mkIf cfg.enable {
     environment = {
