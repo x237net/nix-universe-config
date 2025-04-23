@@ -51,6 +51,7 @@ with lib; let
     br = "branch --format='${gitFormat.branch}'";
     branch = "branch --format='${gitFormat.branch}'";
     c = "commit";
+    cf = "commit --fixup";
     cm = "commit --message";
     cms = "commit --message --signoff";
     co = "checkout";
@@ -64,6 +65,9 @@ with lib; let
     ls = "log --all --abbrev-commit --decorate --format=tformat:'${gitFormat.log.oneline}'";
     new = "switch --create";
     oops = "commit --amend";
+    pop = "stash pop";
+    remove = "restore --staged";
+    save = "stash push";
     ss = "status --branch --short";
     st = "status";
     sw = "switch";
