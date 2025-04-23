@@ -27,12 +27,9 @@
   # The namespace of the flake. See `snowfall.namespace`.
   namespace,
   ...
-}: with lib; {
+}:
+with lib; {
   fs = {
-    import-directory = src: let
-      default = snowfall.fs.get-default-nix-files;
-      non-default = snowfall.fs.get-non-default-nix-files;
-    in
-      (non-default src) ++ (snowfall.fs.get-directories src |> map default |> flatten);
+    import-directory = snowfall.fs.get-non-default-nix-files;
   };
 }
