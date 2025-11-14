@@ -23,7 +23,7 @@
 
   inputs = {
     # Nixpkgs, the Nix packages collection.
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/release-25.05";
 
     # Nix User Repository (NUR), a community-driven repository for Nix packages.
     nur = {
