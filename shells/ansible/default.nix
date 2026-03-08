@@ -31,6 +31,10 @@
   mkShell,
   ...
 }: let
+  dependencies = {
+    inherit (inputs.self.devShells.${pkgs.stdenv.hostPlatform.system}) python3;
+  };
+
   shell = builtins.baseNameOf (builtins.getEnv "SHELL");
   fastfetch_cfg = pkgs.writeText "fastfetch.jsonc" (
     lib.universe.shells.mkFastFetchConfig
@@ -56,6 +60,7 @@
   );
 in
   mkShell {
+    inputsFrom = lib.attrValues dependencies;
     packages = with pkgs;
       [
         ansible
