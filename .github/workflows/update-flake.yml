@@ -25,6 +25,10 @@ name: "Update Nix Flake"
   schedule:
     - cron: "11 1 * * 1"  # Every Monday at 1:11.
 
+permissions:
+  contents: "write"
+  pull-requests: "write"
+
 jobs:
   update-flake:
     runs-on: "ubuntu-slim"
