@@ -23,7 +23,7 @@
 
   inputs = {
     # Nixpkgs, the Nix packages collection.
-    nixpkgs.url = "github:NixOS/nixpkgs/release-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/release-26.05";
 
     # Nix User Repository (NUR), a community-driven repository for Nix packages.
     nur = {
@@ -33,7 +33,7 @@
 
     # nix-darwin, declarative system approach to macOS.
     darwin = {
-      url = "github:LnL7/nix-darwin/nix-darwin-25.11";
+      url = "github:LnL7/nix-darwin/nix-darwin-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -48,7 +48,7 @@
 
     # home-manager, managing a user environment using Nix.
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
