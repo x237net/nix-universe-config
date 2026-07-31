@@ -163,6 +163,23 @@
         name = "yamllint";
         description = "A linter for YAML files.";
       }
+      # Local Clusters
+      {
+        name = "  Local Clusters";
+        description = "";
+      }
+      {
+        name = "k3s";
+        description = "Lightweight Kubernetes distribution.";
+      }
+      {
+        name = "kind";
+        description = "Kubernetes IN Docker - local clusters.";
+      }
+      {
+        name = "minikube";
+        description = "Local Kubernetes engine.";
+      }
     ]
   );
 in
@@ -206,8 +223,15 @@ in
         tflint
         yamllint
 
+        # Local Clusters
+        kind
+        minikube
+
         # Misc
         fastfetch
+      ]
+      ++ lib.optionals pkgs.stdenv.isLinux [
+        k3s
       ]
       ++ (lib.optional (shell != "") pkgs.${shell});
 
