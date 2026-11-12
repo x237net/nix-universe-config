@@ -156,6 +156,10 @@
         description = "A FAST Kubernetes manifests validator.";
       }
       {
+        name = "pluto";
+        description = "Find deprecated Kubernetes apiVersions.";
+      }
+      {
         name = "tflint";
         description = "A Pluggable Terraform Linter.";
       }
@@ -220,6 +224,7 @@ in
         kube-bench
         kube-score
         kubeconform
+        pluto
         tflint
         yamllint
 
