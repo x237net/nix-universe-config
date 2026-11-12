@@ -73,6 +73,16 @@
         statix.enable = true;
         # https://github.com/adrienverge/yamllint
         yamllint.enable = true;
+
+        # Custom hooks.
+        lfs = {
+          enable = true;
+          name = "Git Large File Storage";
+          always_run = true;
+          entry = "git lfs pre-push";
+          language = "system";
+          stages = ["pre-push"];
+        };
       };
     in
       lib.flake-utils.eachDefaultSystemPassThrough (system: {
